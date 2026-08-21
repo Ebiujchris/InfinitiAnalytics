@@ -726,6 +726,18 @@ body {
     margin: 0 auto;
 }
 
+.form-message {
+    min-height: 1.5rem;
+    text-align: center;
+    font-weight: 600;
+    color: var(--red-accent);
+    margin-top: 0.5rem;
+}
+
+.form-message.success {
+    color: #166534;
+}
+
 /* Footer */
 .footer {
     background-color: var(--ink);

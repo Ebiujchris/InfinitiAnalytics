@@ -80,18 +80,32 @@ document.querySelectorAll('.feature-item').forEach((item, index) => {
 });
 
 // Form submission handling
-const contactForm = document.querySelector('.contact-form');
+const contactForm = document.querySelector('#contactForm');
+const formMessage = document.querySelector('.form-message');
+
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    
-    // Get form data
+
     const formData = new FormData(contactForm);
-    
-    // Here you would typically send the form data to a server
-    // For now, we'll just show a success message
-    alert('Thank you for your message! We will get back to you soon.');
-    
-    // Reset form
+    const name = formData.get('name')?.toString().trim() || 'there';
+    const email = formData.get('email')?.toString().trim() || '';
+    const company = formData.get('company')?.toString().trim() || 'Not provided';
+    const phone = formData.get('phone')?.toString().trim() || 'Not provided';
+    const message = formData.get('message')?.toString().trim() || '';
+
+    const subject = encodeURIComponent(`New project inquiry from ${name}`);
+    const body = encodeURIComponent(
+        `Name: ${name}\n` +
+        `Email: ${email}\n` +
+        `Company: ${company}\n` +
+        `Phone: ${phone}\n\n` +
+        `Project details:\n${message}`
+    );
+
+    window.location.href = `mailto:info@infinitianalytics.com?subject=${subject}&body=${body}`;
+
+    formMessage.textContent = 'Your email client is opening with your message. Thanks for reaching out!';
+    formMessage.classList.add('success');
     contactForm.reset();
 });
 
