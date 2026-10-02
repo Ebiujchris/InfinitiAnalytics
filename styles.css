@@ -459,71 +459,43 @@ body {
     background-color: var(--dark-bg);
 }
 
-.projects-heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-}
-
-.projects-copy {
-    min-width: 0;
-}
-
-.projects-copy .section-title,
-.projects-copy .section-subtitle {
-    text-align: left;
-}
-
-.projects-copy .section-subtitle {
-    max-width: 620px;
-    margin-bottom: 0;
-}
-
-.projects-controls {
-    display: flex;
-    flex-shrink: 0;
-    gap: 0.5rem;
-}
-
-.projects-control {
+.projects-grid {
     display: grid;
-    place-items: center;
-    width: 42px;
-    height: 42px;
-    border: 1px solid var(--line);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.projects-grid.is-collapsed .project-card:nth-child(n + 4) {
+    display: none;
+}
+
+.projects-toggle {
+    display: block;
+    margin: 1.5rem auto 0;
+    padding: 0.75rem 1.25rem;
+    border: 1px solid var(--ink);
     border-radius: 4px;
-    background: var(--white);
+    background: transparent;
     color: var(--ink);
     cursor: pointer;
-    font: 600 1.5rem/1 'DM Sans', sans-serif;
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    font: inherit;
+    font-weight: 600;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.projects-control:hover {
-    border-color: var(--red-accent);
-    background: var(--red-accent);
+.projects-toggle:hover {
+    background: var(--ink);
     color: var(--white);
 }
 
-.projects-grid {
-    display: flex;
-    gap: 1.5rem;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    padding: 0 0 1rem;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: thin;
+.projects-toggle[hidden] {
+    display: none;
 }
 
 .project-card {
     display: flex;
     flex-direction: column;
-    flex: 0 0 340px;
     min-height: 390px;
-    min-width: 0;
-    scroll-snap-align: start;
     padding: 2rem;
     background: linear-gradient(145deg, #ffffff, #f5f7f9);
     border: 1px solid rgba(19, 34, 56, 0.13);
@@ -936,16 +908,11 @@ textarea:focus-visible {
     }
 
     .projects-grid {
-        scroll-padding-inline: 0.25rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .projects-heading {
-        display: block;
-    }
-
-    .projects-controls {
-        justify-content: flex-end;
-        margin-top: 1rem;
+    .projects-grid.is-collapsed .project-card:nth-child(n + 3) {
+        display: none;
     }
 
     .process-heading {
@@ -1012,8 +979,11 @@ textarea:focus-visible {
         margin: 3rem 0 1.5rem;
     }
 
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
     .project-card {
-        flex-basis: min(82vw, 360px);
         min-height: 360px;
     }
 }

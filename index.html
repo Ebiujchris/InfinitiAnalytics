@@ -121,19 +121,10 @@
     <!-- Projects Section -->
     <section id="projects" class="projects">
         <div class="container">
-            <div class="projects-heading">
-                <div class="projects-copy">
-                    <h2 class="section-title">Selected <span class="accent">Projects</span></h2>
-                    <p class="section-subtitle">A few of the digital experiences and platforms we have delivered.</p>
-                </div>
-                <div class="projects-controls" aria-label="Project carousel controls">
-                    <button class="projects-control" type="button" data-carousel-prev aria-label="Previous project" title="Previous project">&#8249;</button>
-                    <button class="projects-control" type="button" data-carousel-toggle aria-label="Pause automatic project rotation" aria-pressed="false" title="Pause automatic rotation"><span aria-hidden="true">&#8545;</span></button>
-                    <button class="projects-control" type="button" data-carousel-next aria-label="Next project" title="Next project">&#8250;</button>
-                </div>
-            </div>
+            <h2 class="section-title">Selected <span class="accent">Projects</span></h2>
+            <p class="section-subtitle">A few of the digital experiences and platforms we have delivered.</p>
 
-            <div class="projects-grid">
+            <div class="projects-grid" id="projectsGrid">
                 <article class="project-card">
                     <div class="project-visual project-visual-bwamba"><span>BWAMBA KINGDOM / 01</span><strong>HONOURING<br>HERITAGE</strong></div>
                     <div class="project-card-top">
@@ -178,6 +169,7 @@
                     <a href="https://www.qncsolutions.org/" class="project-link" target="_blank" rel="noopener noreferrer">Visit project <span aria-hidden="true">↗</span></a>
                 </article>
             </div>
+            <button class="projects-toggle" type="button" aria-controls="projectsGrid" aria-expanded="false" hidden>View all projects</button>
         </div>
     </section>
 

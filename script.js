@@ -71,90 +71,31 @@ document.querySelectorAll('.project-card').forEach(card => {
     observer.observe(card);
 });
 
-// Project carousel controls and timed rotation
-const projectTrack = document.querySelector('.projects-grid');
-const projectCards = Array.from(document.querySelectorAll('.project-card'));
-const carouselPrevious = document.querySelector('[data-carousel-prev]');
-const carouselNext = document.querySelector('[data-carousel-next]');
-const carouselToggle = document.querySelector('[data-carousel-toggle]');
-const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+// Expand and collapse the project grid
+const projectsGrid = document.querySelector('.projects-grid');
+const projectCards = Array.from(projectsGrid?.children || []);
+const projectsToggle = document.querySelector('.projects-toggle');
+const mobileProjectsLayout = window.matchMedia('(max-width: 768px)');
 
-if (projectTrack && projectCards.length && carouselPrevious && carouselNext && carouselToggle) {
-    let activeProject = 0;
-    let userPaused = reducedMotion.matches;
-    let pointerInside = false;
-    let focusInside = false;
-    let autoplayTimer;
+if (projectsGrid && projectCards.length && projectsToggle) {
+    let projectsExpanded = false;
 
-    const updateRotation = () => {
-        window.clearTimeout(autoplayTimer);
-        if (userPaused || pointerInside || focusInside || document.hidden) return;
+    const updateProjectsLayout = () => {
+        const visibleCount = mobileProjectsLayout.matches ? 2 : 3;
+        const canExpand = projectCards.length > visibleCount;
 
-        autoplayTimer = window.setTimeout(() => {
-            showProject(activeProject + 1);
-            updateRotation();
-        }, 5000);
+        projectsGrid.classList.toggle('is-collapsed', canExpand && !projectsExpanded);
+        projectsToggle.hidden = !canExpand;
+        projectsToggle.setAttribute('aria-expanded', String(projectsExpanded));
+        projectsToggle.textContent = projectsExpanded ? 'Show fewer projects' : `View all ${projectCards.length} projects`;
     };
 
-    const showProject = index => {
-        activeProject = (index + projectCards.length) % projectCards.length;
-        const trackLeft = projectTrack.getBoundingClientRect().left;
-        const cardLeft = projectCards[activeProject].getBoundingClientRect().left - trackLeft + projectTrack.scrollLeft;
-        projectTrack.scrollTo({
-            left: cardLeft,
-            behavior: reducedMotion.matches ? 'auto' : 'smooth'
-        });
-    };
-
-    const syncActiveProject = () => {
-        const trackLeft = projectTrack.getBoundingClientRect().left;
-        activeProject = projectCards.reduce((closestIndex, card, index) => {
-            const closestDistance = Math.abs(projectCards[closestIndex].getBoundingClientRect().left - trackLeft);
-            const distance = Math.abs(card.getBoundingClientRect().left - trackLeft);
-            return distance < closestDistance ? index : closestIndex;
-        }, 0);
-        updateRotation();
-    };
-
-    carouselPrevious.addEventListener('click', () => showProject(activeProject - 1));
-    carouselNext.addEventListener('click', () => showProject(activeProject + 1));
-    carouselToggle.addEventListener('click', () => {
-        userPaused = !userPaused;
-        carouselToggle.setAttribute('aria-pressed', String(userPaused));
-        carouselToggle.setAttribute('aria-label', userPaused ? 'Play automatic project rotation' : 'Pause automatic project rotation');
-        carouselToggle.setAttribute('title', userPaused ? 'Play automatic rotation' : 'Pause automatic rotation');
-        carouselToggle.firstElementChild.textContent = userPaused ? '\u25b6' : '\u2016';
-        updateRotation();
+    projectsToggle.addEventListener('click', () => {
+        projectsExpanded = !projectsExpanded;
+        updateProjectsLayout();
     });
-
-    projectTrack.addEventListener('scroll', syncActiveProject, { passive: true });
-    projectTrack.addEventListener('pointerenter', () => {
-        pointerInside = true;
-        updateRotation();
-    });
-    projectTrack.addEventListener('pointerleave', () => {
-        pointerInside = false;
-        updateRotation();
-    });
-    projectTrack.addEventListener('focusin', () => {
-        focusInside = true;
-        updateRotation();
-    });
-    projectTrack.addEventListener('focusout', event => {
-        if (!projectTrack.contains(event.relatedTarget)) {
-            focusInside = false;
-            updateRotation();
-        }
-    });
-    document.addEventListener('visibilitychange', updateRotation);
-
-    carouselToggle.setAttribute('aria-pressed', String(userPaused));
-    if (userPaused) {
-        carouselToggle.setAttribute('aria-label', 'Play automatic project rotation');
-        carouselToggle.setAttribute('title', 'Play automatic rotation');
-        carouselToggle.firstElementChild.textContent = '\u25b6';
-    }
-    updateRotation();
+    mobileProjectsLayout.addEventListener('change', updateProjectsLayout);
+    updateProjectsLayout();
 }
 
 // Observe feature items
