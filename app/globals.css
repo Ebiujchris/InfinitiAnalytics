@@ -457,3 +457,63 @@ a:focus-visible, button:focus-visible { outline: 3px solid #83aa55; outline-offs
   .home-service { min-height: 175px; }
   .home-contact > div, .work-contact-strip > div, .about-cta > div { align-items: flex-start; flex-direction: column; justify-content: center; gap: 7px; padding-block: 16px; }
 }
+
+body { font-size: 16px; }
+p:not(.eyebrow) { font-size: 16px; }
+.announcement { font-size: 12px; }
+.primary-nav > a { font-size: 14px; }
+.button { font-size: 14px; }
+.hero-capabilities, .route-hero-meta { font-size: 13px; }
+.dashboard-topbar { font-size: 9px; letter-spacing: .04em; }
+.dash-overline, .dash-status { font-size: 9px; }
+.dash-summary > span, .dash-summary small { font-size: 9px; }
+.dash-summary strong, .chart-heading > div strong { font-size: 10px; }
+.chart-heading > div span, .chart-legend { font-size: 8px; }
+.chart-y-labels, .chart-x-labels { font-size: 8px; }
+.dashboard-note { font-size: 12px; }
+.hero-bottom > div { font-size: 9px; letter-spacing: .07em; }
+.service-number, .step-top { font-size: 12px; }
+.service-copy h3, .project-card h3, .home-service h3, .step h3 { font-size: 16px; }
+.service-tags span, .project-meta, .proof-header, .stat > span, .proof-footer { font-size: 12px; }
+.project-visual-top, .project-visual-bottom { font-size: 9px; }
+.project-card > p, .project-client, .inline-link { font-size: 14px; }
+.step p, .about-copy > p:not(.eyebrow), .contact-copy > p:not(.eyebrow) { font-size: 16px; }
+.contact-details > a, .footer-nav > a { font-size: 14px; }
+.contact-panel-index { font-size: 10px; }
+.contact-panel-note, .footer-nav > span, .footer-bottom { font-size: 12px; }
+.contact-panel > p, .footer-main > div:first-child > p { font-size: 15px; }
+.route-hero-inner > p:not(.eyebrow), .route-section-heading > p, .work-page-heading > p, .service-detail-layout > p { font-size: 16px; }
+.work-contact-strip a, .about-cta a, .home-contact a { font-size: 14px; }
+.contact-page-copy > p:not(.eyebrow), .about-page-copy > p:not(.eyebrow), .contact-form-heading p, .form-feedback { font-size: 15px; }
+.contact-info-list small, .contact-form-heading > span { font-size: 11px; }
+.contact-info-list strong { font-size: 14px; }
+.contact-form label { font-size: 13px; }
+.contact-form input, .contact-form textarea { font-size: 15px; }
+.optional-label { font-size: 10px; }
+.home-service p, .home-approach-inner > div:last-child > p { font-size: 15px; }
+
+@media (max-width: 700px) {
+  p:not(.eyebrow) { font-size: 15px; }
+  .announcement { font-size: 9px; }
+  .announcement-inner > a { font-size: 9px; }
+  .primary-nav > a { font-size: 15px; }
+  .hero-description, .section-intro, .service-copy > p, .project-card > p,
+  .approach-top > p, .step p, .about-copy > p:not(.eyebrow),
+  .contact-copy > p:not(.eyebrow), .route-hero-inner > p:not(.eyebrow),
+  .route-section-heading > p, .work-page-heading > p,
+  .about-page-copy > p:not(.eyebrow), .contact-page-copy > p:not(.eyebrow),
+  .service-detail-layout > p, .home-service p, .home-approach-inner > div:last-child > p { font-size: 15px; }
+  .hero-capabilities { font-size: 13px; }
+  .hero-actions .button { font-size: 13px; }
+  .hero-bottom > div { flex-wrap: wrap; gap: 7px; padding-block: 7px; font-size: 8px; }
+  .service-copy h3, .project-card h3, .home-service h3, .step h3 { font-size: 15px; }
+  .service-copy > p { margin-bottom: 10px; }
+  .service-tags span, .project-meta, .project-client, .proof-header,
+  .stat > span, .proof-footer, .contact-details > a, .contact-info-list strong,
+  .footer-nav > a, .footer-bottom { font-size: 12px; }
+  .project-visual-top, .project-visual-bottom { font-size: 9px; }
+  .contact-panel > p, .contact-panel-note, .footer-main > div:first-child > p { font-size: 14px; }
+  .contact-form label { font-size: 14px; }
+  .contact-form input, .contact-form textarea { font-size: 15px; }
+  .home-contact p { font-size: 17px; }
+}
